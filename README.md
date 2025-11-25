@@ -29,10 +29,11 @@ Push Code → Tests Fail → Issue Created → Claude Fixes → PR Created → A
 4. **Claude Code analyzes** the failures
 5. **Claude fixes the code** and runs tests
 6. **Claude creates a PR** with fixes
-7. **Auto-merge waits** for CI checks
-8. **PR gets merged** automatically
-9. **Issue is closed** with success message
-10. **Tests run again** on main branch - all green! ✅
+7. **Auto-merge detects PR** and checks out the branch
+8. **Tests run directly** on the PR code to verify the fix
+9. **PR gets merged** automatically if tests pass
+10. **Issue is closed** with success message
+11. **Tests run again** on main branch - all green! ✅
 
 ## 🚀 Quick Start
 
@@ -89,9 +90,12 @@ github-claudecode-demo/
 
 Go to **Settings** → **Secrets and variables** → **Actions** → **New repository secret**:
 
-| Secret Name | Description | Get it from |
-|------------|-------------|-------------|
-| `ANTHROPIC_API_KEY` | Your Anthropic API key | https://console.anthropic.com/ |
+| Secret Name | Description | Get it from | Required |
+|------------|-------------|-------------|----------|
+| `ANTHROPIC_API_KEY` | Your Anthropic API key | https://console.anthropic.com/ | ✅ Yes |
+| `PAT_TOKEN` | Personal Access Token for workflow permissions | See [SETUP_PAT.md](SETUP_PAT.md) | ✅ Recommended |
+
+**Note:** `PAT_TOKEN` is highly recommended for full automation. Without it, the auto-merge workflow may fail due to permission issues. See [SETUP_PAT.md](SETUP_PAT.md) for setup instructions.
 
 ### Required Permissions
 
@@ -138,10 +142,14 @@ Steps:
 Part of automated-test-fix.yml
 Steps:
   1. Wait for Claude to create PR (max 30 min)
-  2. Wait for CI checks to pass (max 15 min)
-  3. Auto-merge the PR
-  4. Close the issue with success message
+  2. Checkout the PR branch
+  3. Run tests directly on the PR code
+  4. Auto-merge the PR if tests pass
+  5. Close the issue with success message
+  6. Comment on issue if tests fail
 ```
+
+**Key Feature:** The workflow runs tests directly on the PR branch instead of waiting for external CI checks. This solves the chicken-and-egg problem where PRs created by bots don't trigger separate workflow runs.
 
 ## 🎬 Demo
 

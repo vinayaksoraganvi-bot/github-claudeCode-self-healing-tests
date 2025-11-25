@@ -1,14 +1,17 @@
 # Setting Up Personal Access Token (PAT) for Full Automation
 
-This guide explains how to enable fully automated workflow triggering without manual intervention.
+This guide explains how to enable fully automated workflow with proper permissions.
 
 ## Why You Need a PAT
 
-GitHub's default `GITHUB_TOKEN` has a security limitation: workflows using it cannot trigger other workflows. This prevents the automated test fix workflow from automatically triggering the Claude Code Assistant workflow.
+The automated test fix workflow requires a Personal Access Token (PAT) for two critical reasons:
 
-**With PAT:** Tests fail → Issue created → Auto-fix workflow triggers → PR created → Auto-merged → Issue closed ✅
+1. **Permission to read check runs**: The default `GITHUB_TOKEN` doesn't have permission to read check runs from PRs
+2. **Permission to merge PRs**: Enhanced permissions are needed for the auto-merge functionality
 
-**Without PAT:** Tests fail → Issue created → ❌ *Manual comment needed* → Auto-fix workflow triggers → PR created → Auto-merged → Issue closed
+**With PAT:** Tests fail → Issue created → PR created → Tests run on PR → Auto-merged → Issue closed ✅
+
+**Without PAT:** Tests fail → Issue created → PR created → ❌ *Permission errors* → Manual intervention needed
 
 ## Setup Instructions
 
@@ -26,7 +29,9 @@ GitHub's default `GITHUB_TOKEN` has a security limitation: workflows using it ca
      - Contents: **Read and write**
      - Issues: **Read and write**
      - Pull requests: **Read and write**
-     - Workflows: **Read and write**
+     - Metadata: **Read-only** (automatically included)
+     - Actions: **Read-only** (for reading workflow runs)
+     - Checks: **Read-only** (for reading check runs)
 
 4. Click **Generate token**
 

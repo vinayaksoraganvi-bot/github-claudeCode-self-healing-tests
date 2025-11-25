@@ -100,13 +100,15 @@ sequenceDiagram
 sequenceDiagram
     participant AM as Auto-Merge Workflow
     participant GH as GitHub
-    participant CI as CI Checks
+    participant Code as PR Branch
+    participant Tests as Test Suite
     participant Issue as GitHub Issue
-    
+
     AM->>GH: Poll for new PR
     GH-->>AM: PR found
-    AM->>CI: Wait for checks
-    CI-->>AM: All checks pass ✅
+    AM->>Code: Checkout PR branch
+    AM->>Tests: Run tests directly
+    Tests-->>AM: All tests pass ✅
     AM->>GH: Merge PR (squash)
     GH-->>AM: Merged successfully
     AM->>Issue: Add success comment
@@ -156,13 +158,14 @@ T+2:00  Claude identifies root cause
 T+3:00  Claude fixes code and verifies
 T+3:30  Claude creates PR
 T+4:00  Auto-merge workflow detects PR
-T+4:30  CI checks run on PR
-T+5:00  All checks pass
-T+5:15  PR auto-merged
-T+5:30  Issue closed
-T+6:00  Tests run again on main - all green! ✅
+T+4:15  Checks out PR branch
+T+4:30  Tests run directly on PR code
+T+4:45  All tests pass ✅
+T+5:00  PR auto-merged
+T+5:15  Issue closed
+T+5:30  Tests run again on main - all green! ✅
 
-Total time: ~6 minutes (hands-free!)
+Total time: ~5-6 minutes (hands-free!)
 ```
 
 ## Component Architecture

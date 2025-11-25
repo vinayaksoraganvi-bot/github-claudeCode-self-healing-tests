@@ -31,6 +31,8 @@ Use this checklist to ensure everything is configured correctly before going liv
 - [ ] Created `ANTHROPIC_API_KEY` secret
 - [ ] Verified API key starts with `sk-ant-`
 - [ ] Tested API key works (made a test API call)
+- [ ] Created `PAT_TOKEN` secret (highly recommended)
+- [ ] Verified PAT has required permissions (see SETUP_PAT.md)
 
 ### 4. GitHub Actions Permissions
 
@@ -98,8 +100,9 @@ Wait for Claude Code to respond (~3-5 minutes):
 Wait for auto-merge (~2-3 minutes):
 
 - [ ] Auto-merge workflow detected the PR
-- [ ] CI checks ran on the PR
-- [ ] All checks passed
+- [ ] Workflow checked out the PR branch
+- [ ] Tests ran directly on the PR code
+- [ ] All tests passed
 - [ ] PR was merged automatically
 - [ ] Original issue was closed
 - [ ] Success comment added to issue
