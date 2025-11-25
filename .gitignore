@@ -27,6 +27,12 @@ test_output.txt
 # Claude Code
 .claude/
 
+# Backup files
+*.bak
+*.backup
+*.tmp
+*~
+
 # OS
 .DS_Store
 *.Zone.Identifier
