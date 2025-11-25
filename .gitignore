@@ -1,1 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+test-report.json
+test-report.html
+test_output.txt
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Claude Code
+.claude/
+
+# OS
+.DS_Store
 *.Zone.Identifier
+Thumbs.db
+
+# Environment
+.env
+.env.local
+venv/
+env/
+ENV/
