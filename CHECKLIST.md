@@ -126,8 +126,9 @@ Wait for auto-merge (~2-3 minutes):
 
 ### 13. Documentation
 
-- [ ] Read SETUP_GUIDE.md
 - [ ] Read README.md
+- [ ] Read START_HERE.md
+- [ ] Read SETUP_PAT.md
 - [ ] Reviewed WORKFLOW_DIAGRAM.md
 - [ ] Bookmarked important links
 
@@ -272,11 +273,12 @@ I confirm that I have:
 
 ## Quick Reference Links
 
-- 📖 [Setup Guide](SETUP_GUIDE.md)
-- 📊 [Workflow Diagram](WORKFLOW_DIAGRAM.md)
 - 🚀 [README](README.md)
+- 📖 [Quick Start](START_HERE.md)
+- 🔑 [PAT Setup](SETUP_PAT.md)
+- 📊 [Workflow Diagram](WORKFLOW_DIAGRAM.md)
 - 🏃 [Actions](https://github.com/vinayaksoraganvi-bot/github-claudecode-demo/actions)
-- 🔑 [Secrets](https://github.com/vinayaksoraganvi-bot/github-claudecode-demo/settings/secrets/actions)
+- 🔐 [Secrets](https://github.com/vinayaksoraganvi-bot/github-claudecode-demo/settings/secrets/actions)
 - ⚙️ [Settings](https://github.com/vinayaksoraganvi-bot/github-claudecode-demo/settings)
 - 💰 [Anthropic Console](https://console.anthropic.com/)
 - 📚 [Claude Code Docs](https://docs.claude.com/)

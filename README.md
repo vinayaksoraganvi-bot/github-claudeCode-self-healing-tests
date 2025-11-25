@@ -67,7 +67,7 @@ claude
 
 ### Option 3: Manual Setup
 
-See [SETUP_GUIDE.md](SETUP_GUIDE.md) for detailed manual setup instructions.
+See the [Configuration](#-configuration) and [How It Works](#-how-it-works) sections below for detailed manual setup instructions.
 
 ## 📁 Repository Structure
 
@@ -80,7 +80,9 @@ github-claudecode-demo/
 ├── test_automation_demo.py             # Demo test with intentional bugs
 ├── requirements-dev.txt                # Testing dependencies
 ├── setup.sh                            # Quick setup script
-├── SETUP_GUIDE.md                      # Detailed setup guide
+├── START_HERE.md                       # Quick start guide
+├── CHECKLIST.md                        # Setup verification checklist
+├── SETUP_PAT.md                        # PAT setup instructions
 └── README.md                           # This file
 ```
 
@@ -286,7 +288,10 @@ For **development** branches:
 
 ## 📚 Documentation
 
-- [Setup Guide](SETUP_GUIDE.md) - Detailed setup instructions
+- [Quick Start Guide](START_HERE.md) - Getting started
+- [Setup Checklist](CHECKLIST.md) - Step-by-step verification
+- [PAT Setup](SETUP_PAT.md) - Personal Access Token configuration
+- [Workflow Diagrams](WORKFLOW_DIAGRAM.md) - Visual flow documentation
 - [Claude Code Docs](https://docs.claude.com/) - Official documentation
 - [GitHub Actions Docs](https://docs.github.com/actions) - Workflow syntax
 - [Anthropic API Docs](https://docs.anthropic.com/) - API reference
@@ -342,7 +347,8 @@ MIT License - feel free to use this in your own projects!
 
 ## 📧 Support
 
-- 📖 [Documentation](SETUP_GUIDE.md)
+- 📖 [Documentation](README.md)
+- 📋 [Setup Checklist](CHECKLIST.md)
 - 💬 [GitHub Issues](https://github.com/vinayaksoraganvi-bot/github-claudecode-demo/issues)
 - 🌐 [Anthropic Support](https://support.anthropic.com/)
 

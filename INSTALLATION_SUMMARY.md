@@ -9,17 +9,16 @@ I've created a **complete, production-ready automated test-fix pipeline** for yo
 
 | File | Size | Description |
 |------|------|-------------|
-| `automated-test-fix.yml` | 9.8K | Main automation workflow - runs tests, creates issues, auto-merges |
-| `claude-code-assistant.yml` | 2.9K | Claude Code integration - responds to @claude mentions |
+| `automated-test-fix.yml` | 10K | Main automation workflow - runs tests, creates issues, auto-merges |
+| `claude-code-assistant.yml` | 3.4K | Claude Code integration - responds to @claude mentions |
 | `setup.sh` | 15K | One-command setup script (recommended!) |
-| `SETUP_GUIDE.md` | 13K | Detailed setup instructions with examples |
-| `README.md` | 8.7K | Beautiful repository README with badges and demos |
-| `CHECKLIST.md` | 8.3K | Step-by-step verification checklist |
-| `WORKFLOW_DIAGRAM.md` | 7.0K | Visual diagrams of the entire flow |
-| `auto-fix-config.yml` | 1.3K | Configuration for protected files and branches |
-| `slack-notification-step.yml` | 1.8K | Optional Slack integration |
+| `README.md` | 9.6K | Beautiful repository README with badges and demos |
+| `CHECKLIST.md` | 8.6K | Step-by-step verification checklist |
+| `START_HERE.md` | 4.1K | Quick start guide |
+| `SETUP_PAT.md` | 4.1K | PAT setup instructions |
+| `WORKFLOW_DIAGRAM.md` | 7.2K | Visual diagrams of the entire flow |
 
-**Total:** 9 files, ready to use!
+**Total:** 8 files, ready to use!
 
 ## 🚀 Quick Start (3 Steps)
 
@@ -145,7 +144,7 @@ Total: ~6 minutes, completely hands-free!
 ## 🎓 Learning Resources
 
 ### Essential Reading
-1. **[SETUP_GUIDE.md](SETUP_GUIDE.md)** - Start here!
+1. **[START_HERE.md](START_HERE.md)** - Start here!
 2. **[README.md](README.md)** - Overview and features
 3. **[CHECKLIST.md](CHECKLIST.md)** - Verification steps
 4. **[WORKFLOW_DIAGRAM.md](WORKFLOW_DIAGRAM.md)** - Visual flow
@@ -252,7 +251,7 @@ See [CHECKLIST.md](CHECKLIST.md) for full troubleshooting guide.
 ## 🤝 Support & Help
 
 ### If You Need Help
-1. 📖 Read [SETUP_GUIDE.md](SETUP_GUIDE.md)
+1. 📖 Read [README.md](README.md)
 2. ✅ Check [CHECKLIST.md](CHECKLIST.md)
 3. 🔍 Review workflow logs
 4. 💬 Create GitHub issue
@@ -331,7 +330,7 @@ Everything you need is in these 9 files. Just:
 
 **Ready to let AI fix your tests automatically?** 🚀
 
-[Get Started →](SETUP_GUIDE.md)
+[Get Started →](START_HERE.md)
 
 Made with ❤️ and 🤖
 
