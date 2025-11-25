@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       tests_failed: ${{ steps.test.outcome == 'failure' }}
-      issue_number: ${{ steps.create_issue.outputs.issue_number }}
+      issue_number: ${{ steps.create_issue.outputs.result }}
     
     steps:
       - name: Checkout repository
