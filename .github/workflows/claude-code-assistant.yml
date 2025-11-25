@@ -1,0 +1,81 @@
+name: Claude Code Assistant
+
+on:
+  # Trigger when someone mentions @claude in an issue or PR
+  issue_comment:
+    types: [created]
+  issues:
+    types: [opened, assigned]
+  pull_request_review_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+  actions: read
+
+jobs:
+  claude:
+    # Only run if @claude is mentioned or issue has specific labels
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.labels.*.name, 'test-failure')))
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+          pip install pytest pytest-json-report
+
+      - name: Run Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          # Claude will automatically understand the context and fix the issue
+          # It will read test reports, analyze failures, make fixes, and create a PR
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          
+          # Optional: Customize Claude's behavior
+          claude_args: |
+            {
+              "model": "claude-sonnet-4-20250514",
+              "maxTokens": 8000
+            }
+          
+          # Optional: Add custom instructions for fixing tests
+          prompt: |
+            Please analyze the test failures in this issue, identify the root cause, 
+            and create a PR with fixes. Follow these guidelines:
+            
+            1. Run the tests first to understand the failures
+            2. Analyze the error messages and stack traces
+            3. Fix the implementation code (not the tests unless they're wrong)
+            4. Ensure all tests pass after your changes
+            5. Keep changes minimal and focused
+            6. Add comments explaining complex fixes
+            7. Follow the existing code style
+            
+            After fixing, create a PR with:
+            - Clear title describing the fix
+            - Detailed description of what was wrong and how you fixed it
+            - Reference to this issue
