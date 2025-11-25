@@ -139,8 +139,8 @@ jobs:
                 per_page: 10
               });
               
-              const claudePR = prs.find(pr => 
-                pr.user.login.includes('claude') && 
+              const claudePR = prs.find(pr =>
+                (pr.user.login.includes('claude') || pr.user.login.includes('github-actions')) &&
                 pr.body && pr.body.includes(`#${issueNumber}`)
               );
               
