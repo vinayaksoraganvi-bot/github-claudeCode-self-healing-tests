@@ -17,8 +17,8 @@ def test_truthy():
     assert bool([42]) is True
 # ---- 3 tests that FAIL (intentional) ----
 def test_fail_math():
-    assert 2 * 2 == 5
+    assert 2 * 2 == 4
 def test_fail_string():
-    assert "Hello".islower()
+    assert "Hello".isupper() is False
 def test_fail_contains():
-    assert 5 in [1,2,3]
+    assert 3 in [1,2,3]
