@@ -8,9 +8,25 @@ testpaths: .
 plugins: html-4.1.1, cov-7.0.0, json-report-1.5.0, metadata-3.1.1
 collecting ... collected 4 items
 
-test_automation_demo.py::test_add_positive_numbers PASSED                [ 25%]
-test_automation_demo.py::test_add_negative_numbers PASSED                [ 50%]
+test_automation_demo.py::test_add_positive_numbers FAILED                [ 25%]
+test_automation_demo.py::test_add_negative_numbers FAILED                [ 50%]
 test_automation_demo.py::test_add_zero PASSED                            [ 75%]
 test_automation_demo.py::test_multiply_numbers PASSED                    [100%]
 
-============================== 4 passed in 0.04s ===============================
+=================================== FAILURES ===================================
+__________________________ test_add_positive_numbers ___________________________
+test_automation_demo.py:20: in test_add_positive_numbers
+    assert result == 5, f"Expected 5 but got {result}"
+E   AssertionError: Expected 5 but got -1
+E   assert -1 == 5
+__________________________ test_add_negative_numbers ___________________________
+test_automation_demo.py:26: in test_add_negative_numbers
+    assert result == -5, f"Expected -5 but got {result}"
+E   AssertionError: Expected -5 but got 1
+E   assert 1 == -5
+=========================== short test summary info ============================
+FAILED test_automation_demo.py::test_add_positive_numbers - AssertionError: Expected 5 but got -1
+assert -1 == 5
+FAILED test_automation_demo.py::test_add_negative_numbers - AssertionError: Expected -5 but got 1
+assert 1 == -5
+========================= 2 failed, 2 passed in 0.06s ==========================
