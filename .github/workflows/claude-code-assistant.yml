@@ -1,7 +1,6 @@
 name: Claude Code Assistant
 
 on:
-  # Trigger when someone mentions @claude in an issue or PR
   issue_comment:
     types: [created]
   issues:
@@ -20,7 +19,6 @@ permissions:
 
 jobs:
   claude:
-    # Only run if @claude is mentioned or issue has specific labels
     if: |
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
@@ -51,18 +49,12 @@ jobs:
       - name: Run Claude Code
         uses: anthropics/claude-code-action@v1
         with:
-          # Claude will automatically understand the context and fix the issue
-          # It will read test reports, analyze failures, make fixes, and create a PR
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          
-          # Optional: Customize Claude's behavior
           claude_args: |
             {
               "model": "claude-sonnet-4-20250514",
               "maxTokens": 8000
             }
-          
-          # Optional: Add custom instructions for fixing tests
           prompt: |
             Please analyze the test failures in this issue, identify the root cause, 
             and create a PR with fixes. Follow these guidelines:

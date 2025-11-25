@@ -63,7 +63,7 @@ jobs:
         if: steps.test.outcome == 'failure'
         id: analyze
         run: |
-          python << 'EOF'
+          python << 'PYTHON_EOF'
           import json
           import os
           
@@ -88,7 +88,7 @@ jobs:
           
           with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
               f.write(f"failure_count={len(failures)}\n")
-          EOF
+          PYTHON_EOF
 
       - name: Create issue for failures
         if: steps.test.outcome == 'failure'
@@ -110,8 +110,6 @@ jobs:
             console.log(`Created issue #${issue.data.number}`);
             return issue.data.number;
 
-  # Claude Code will automatically respond to the @claude mention in the issue
-  # and create a PR with fixes. This job waits for that PR and auto-merges it.
   auto_merge:
     name: Auto-merge Claude's Fix PR
     needs: test
@@ -132,7 +130,6 @@ jobs:
             console.log(`Waiting for PR linked to issue #${issueNumber}...`);
             
             for (let i = 0; i < maxIterations; i++) {
-              // Check for PRs that mention the issue
               const { data: prs } = await github.rest.pulls.list({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -142,7 +139,6 @@ jobs:
                 per_page: 10
               });
               
-              // Find PR created by claude-code[bot] that references the issue
               const claudePR = prs.find(pr => 
                 pr.user.login.includes('claude') && 
                 pr.body && pr.body.includes(`#${issueNumber}`)
@@ -170,8 +166,6 @@ jobs:
             const pollIntervalSeconds = 20;
             const maxIterations = (maxWaitMinutes * 60) / pollIntervalSeconds;
             
-            console.log(`Waiting for checks on PR #${prNumber}...`);
-            
             for (let i = 0; i < maxIterations; i++) {
               const { data: pr } = await github.rest.pulls.get({
                 owner: context.repo.owner,
@@ -179,7 +173,6 @@ jobs:
                 pull_number: prNumber
               });
               
-              // Get the check runs for the PR head
               const { data: checks } = await github.rest.checks.listForRef({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -191,17 +184,13 @@ jobs:
                 check.name !== 'Auto-merge Claude\'s Fix PR'
               );
               
-              if (relevantChecks.length === 0) {
-                console.log('No checks yet, waiting...');
-              } else {
+              if (relevantChecks.length > 0) {
                 const allComplete = relevantChecks.every(check => 
                   check.status === 'completed'
                 );
                 const allSuccess = relevantChecks.every(check => 
                   check.conclusion === 'success'
                 );
-                
-                console.log(`Checks: ${relevantChecks.length} total, completed: ${allComplete}, success: ${allSuccess}`);
                 
                 if (allComplete && allSuccess) {
                   console.log('✅ All checks passed!');
@@ -214,7 +203,6 @@ jobs:
               await new Promise(resolve => setTimeout(resolve, pollIntervalSeconds * 1000));
             }
             
-            console.log('⚠️ Timeout waiting for checks, will try to merge anyway');
             return false;
 
       - name: Auto-merge PR
@@ -234,9 +222,6 @@ jobs:
                 commit_message: 'Automatically fixed by Claude Code and merged via CI/CD pipeline'
               });
               
-              console.log(`✅ Successfully merged PR #${prNumber}`);
-              
-              // Close the issue
               await github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -245,7 +230,6 @@ jobs:
                 state_reason: 'completed'
               });
               
-              // Add success comment
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -256,7 +240,6 @@ jobs:
             } catch (error) {
               console.error(`Failed to merge: ${error.message}`);
               
-              // Comment on the issue about the failure
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
