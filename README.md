@@ -155,8 +155,9 @@ Steps:
 
 ## 🎬 Demo
 
+🎥 [Demo video on YouTube](https://youtu.be/G-rCN5YOqb8)
+
 Want to see it in action? Just push this test file:
-🎥 [https://youtu.be/gljTuoBQ4yw](https://youtu.be/WLyx46OiODQ)
 
 ```python
 # test_automation_demo.py
