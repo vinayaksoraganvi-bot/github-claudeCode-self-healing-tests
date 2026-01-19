@@ -332,7 +332,6 @@ For **development** branches:
 
 - [Anthropic](https://www.anthropic.com/) - For Claude Code
 - [GitHub Actions](https://github.com/features/actions) - For CI/CD platform
-- Community - For feedback and contributions
 
 ## 📧 Support
 
