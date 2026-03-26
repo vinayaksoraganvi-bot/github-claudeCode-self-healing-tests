@@ -6,7 +6,7 @@ This file intentionally contains bugs to trigger the automation.
 def add_numbers(a, b):
     """Add two numbers together."""
     # Intentional bug: subtracts instead of adds
-    return a + b  # This should be: return a + b
+    return a - b  # This should be: return a + b
 
 
 def multiply_numbers(a, b):
